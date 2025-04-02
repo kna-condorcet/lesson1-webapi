@@ -35,7 +35,7 @@ public static class CustomersEndpoints
         });
 
 
-        app.MapDelete("/user/{id}", async (int id, CustomerService data) =>
+        app.MapDelete("/customers/{id}", async (int id, CustomerService data) =>
         {
             var customer = await data.GetById(id);
             if (customer is null)
