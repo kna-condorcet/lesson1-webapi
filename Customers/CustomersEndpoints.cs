@@ -4,21 +4,21 @@ public static class CustomersEndpoints
 {
     public static void MapCustomerEndpoints(this WebApplication app)
     {
-        app.MapGet("/customers", async (CustomerService service) =>
+        app.MapGet("/customers", async (ICustomerService service) =>
         {
             var customers = await service.List();
             return Results.Ok(customers);
         });
 
         app.MapPost("/customers",
-            async (Customer request, CustomerService service) =>
+            async (Customer request, ICustomerService service) =>
             {
                 var newCustomer = new Customer(request.Id, request.Name);
                 await service.Add(newCustomer);
                 return Results.Created($"/customers/{newCustomer.Id}", newCustomer);
             });
 
-        app.MapPut("/customers/{id}", async (int id, Customer request, CustomerService data) =>
+        app.MapPut("/customers/{id}", async (int id, Customer request, ICustomerService data) =>
         {
             var existingCustomer = await data.GetById(id);
             if (existingCustomer is null)
@@ -35,7 +35,7 @@ public static class CustomersEndpoints
         });
 
 
-        app.MapDelete("/customers/{id}", async (int id, CustomerService data) =>
+        app.MapDelete("/customers/{id}", async (int id, ICustomerService data) =>
         {
             var customer = await data.GetById(id);
             if (customer is null)

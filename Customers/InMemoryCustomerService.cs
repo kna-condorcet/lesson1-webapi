@@ -1,10 +1,10 @@
 namespace webapi.Customers;
 
-public class CustomerService
+public class InMemoryCustomerService: ICustomerService
 {
     private static readonly List<Customer> _customers = new();
     
-    public CustomerService()
+    public InMemoryCustomerService()
     {
         _customers.AddRange(new []
         {
