@@ -14,9 +14,9 @@ public class CustomerService
         });
     }
     
-    public Task<IEnumerable<Customer>> List()
+    public Task<List<Customer>> List()
     {
-        return Task.FromResult(_customers.ToArray().AsEnumerable());
+        return Task.FromResult(_customers);
     }
     
     public Task<Customer> GetById(int customerId)
